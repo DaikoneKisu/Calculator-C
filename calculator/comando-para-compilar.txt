@@ -1,1 +1,0 @@
-gcc -std=c11 -o build/calculator -I external/exceptions4c-3.0.5/src/ -I src/ external/exceptions4c-3.0.5/src/*.c src/*.c src/calculator/*.c src/calculator/evaluator/*.c src/calculator/evaluator/tokenizer/*.c src/ui/*.c src/containers/array/*.c src/containers/stack/*.c src/misc-utils/string-utils/*.c src/misc-utils/number-converters/*.c -lm
