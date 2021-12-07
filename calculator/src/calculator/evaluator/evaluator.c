@@ -224,7 +224,7 @@ char* arccos_operation(Evaluator* evaluator) {
   if (operand < -1 || operand > 1) {
     throw(RuntimeException, "the arccosine operand must be in the range [-1, 1]");
   }
-  double result = asin(operand);
+  double result = acos(operand);
   double_stack_push(evaluator->buffer, result);
 
   return number_converter_convert_number_to_string(evaluator->converter, result);
