@@ -421,7 +421,17 @@ char* evaluate_tokens(Evaluator* evaluator, TokenArray* tokens) {
     // result of the evaluation of the last subexpression
     free(result);
 
-    result = evaluate_token(evaluator, token_array_get(tokens, i));
+    DoubleStack* old_buffer_state = double_stack_clone(evaluator->buffer);
+    try {
+      result = evaluate_token(evaluator, token_array_get(tokens, i));
+    } catch(RuntimeException) {
+      double_stack_destroy(evaluator->buffer);
+      evaluator->buffer = old_buffer_state;
+
+      // preserve the original reason of the error and propagate it
+      rethrow(e4c_get_exception()->message);
+    }
+    double_stack_destroy(old_buffer_state);
   }
 
   return result;
